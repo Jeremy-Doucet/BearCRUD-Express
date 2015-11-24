@@ -1,7 +1,9 @@
 "use strict";
+let uuid = require('uuid');
 let bears = [];
 
 let Bear = function(name, color, species) {
+  this._id = uuid.v4(); //generate a random uuid and assign to the _id property
   this.name = name;
   this.color = color;
   this.species = species;
@@ -12,9 +14,11 @@ let bearModel = {
     return bears;
   },
   createSync: function(obj, color, species) {
-    if(typeof obj === 'object') {
+    if(typeof obj === 'object' && obj) {
+      if(!obj.name || !obj.color || !obj.species) return false;
       bears.push(new Bear(obj.name, obj.color, obj.species));
     } else {
+      if(!obj || !color || !species) return false;
       bears.push(new Bear(obj, color, species));
     }
   },
