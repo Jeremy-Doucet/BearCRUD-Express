@@ -49,7 +49,14 @@ let bearModel = {
     }
   },
   update: function(id, obj, cb) {
-    
+    if(!id || !obj._id || !obj.name || !obj.color || !obj.species) return cb("You must include all fields.");
+    for(var i = bears.length - 1; i >= 0; i--) {
+      if(bears[i]._id === id) {
+        bears[i] = obj;
+        return cb(null, obj);
+      }
+    }
+    cb("Could not find your bear in the array.");
   },
   deleteSync: function(id_obj) {
     if (typeof id_obj === 'object' && id_obj) {
