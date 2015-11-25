@@ -13,6 +13,15 @@ let bearModel = {
   getAllBears: function() {
     return bears;
   },
+  findById: function(id, cb) {
+    if(!id) return cb('You must have an id');
+    for(var i = bears.length - 1; i >= 0; i--) {
+      if(bears[i]._id === id) {
+        return cb(null, bears[i]);
+      }
+    }
+    cb("Could not find the bear you were looking for.");
+  },
   createSync: function(obj, color, species) {
     if (typeof obj === 'object' && obj) {
       if (!obj.name || !obj.color || !obj.species) return false;
@@ -38,6 +47,9 @@ let bearModel = {
       if (typeof cb === 'function') cb(null, "success");
       else throw "Callback was not passed into the create function";
     }
+  },
+  update: function(id, obj, cb) {
+    
   },
   deleteSync: function(id_obj) {
     if (typeof id_obj === 'object' && id_obj) {

@@ -32,9 +32,34 @@ app.get('/bears', (req, res) => {
 	res.send(Bear.getAllBears());
 });
 
+// GET /bears/:id
+app.get('/bears/:id', (req, res) => {
+	Bear.findById(req.params.id, (err, result) => {
+		if(err) return res.status(400).send(err);
+		res.send(result);
+	});
+});
+
 // POST /bears
 app.post('/bears', (req, res) => {
 	Bear.create(req.body, (err, result) => {
+		if(err) return res.status(400).send(err);
+		res.send(result);
+	});
+});
+
+// PUT /bears/:id
+app.put('/bears/:id', (req, res) => {
+	if(req.params.id !== req.body._id) return res.status(500).send('Invalid id');
+	Bear.update(req.params.id, req.body, (err, result) => {
+		if(err) return res.status(400).send(err);
+		res.send(result);
+	});
+});
+
+// DELETE /bears/:id
+app.delete('/bears/:id', (req, res) => {
+	Bear.delete(req.params.id, (err, result) => {
 		if(err) return res.status(400).send(err);
 		res.send(result);
 	});

@@ -12,6 +12,10 @@
 			url: '/Bear/Create',
 			templateUrl: '/templates/create_bear.html',
 			controller: 'CreateBearController as vm'
+		}).state('EditBear', {
+			url: '/Bear/Edit/:id',
+			templateUrl: '/templates/edit_bear.html',
+			controller: 'EditBearController as vm'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

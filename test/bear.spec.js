@@ -119,6 +119,27 @@ describe('Bear Database', () => {
 
   }); // end of deleting bear sync
   describe('deleting bear async', () => {
-
+    it('should delete the bear when an id is passed in', (done) => {
+      let bears = bear.getAllBears();
+      let bear2 = bears[2];
+      bear.delete(bear2._id, (err, result) => {
+        should.equal(err, null);
+        should.equal(result, "Success");
+        let bear_array = bear.getAllBears();
+        should.equal(bear_array.indexOf(bear2), -1);
+        done();
+      });
+    });
+    it('should delete the bear when an object is passed in', (done) => {
+      let bears = bear.getAllBears();
+      let bear1 = bears[1];
+      bear.delete(bear1, (err, result) => {
+        should.equal(err, null);
+        should.equal(result, "Success");
+        let bear_array = bear.getAllBears();
+        should.equal(bear_array.indexOf(bear1), -1);
+        done();
+      });
+    });
   }); // end of deleting bear async
 });
