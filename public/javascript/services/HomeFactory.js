@@ -6,10 +6,18 @@
 	function HomeFactory($http, $q) {
 		var o = {};
 
-		o.getCounter = function() {
+		o.getAllBears = function() {
 			var q = $q.defer();
-			$http.get('/counter').then(function(res) {
-				q.resolve(res.data.counter);
+			$http.get('/bears').then(function(res) {
+				q.resolve(res.data);
+			});
+			return q.promise;
+		};
+
+		o.createBear = function(bear) {
+			var q = $q.defer();
+			$http.post('/bears', bear).then(function(res) {
+				q.resolve(res.data);
 			});
 			return q.promise;
 		};

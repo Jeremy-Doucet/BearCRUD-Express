@@ -1,10 +1,9 @@
-<md-content layout="column" layout-fill layout-padding>
-  <md-card layout-padding>
-    <div layout layout-align="center">
-      <h1>{{vm.counter}}</h1>
-    </div>
-    <div layout layout-align="center">
-      <md-button class="md-raised md-primary">+1</md-button>
-    </div>
-  </md-card>
+<md-content layout="row"layout-padding layout-wrap>
+  <div flex="33" ng-repeat="b in vm.bears" layout="column" layout-padding>
+    <md-card layout-padding>
+      <h3>{{b.name}}</h3>
+      <h4>{{b.color}}</h4>
+      <h4>{{b.species}}</h4>
+    </md-card>
+  </div>
 </md-content>

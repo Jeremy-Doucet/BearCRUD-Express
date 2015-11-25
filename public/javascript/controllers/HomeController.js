@@ -5,10 +5,9 @@
 
 	function HomeController(HomeFactory) {
 		var vm = this;
-		vm.title = 'Welcome to our App!';
 
-		HomeFactory.getCounter().then(function(res) {
-			vm.counter = res;
+		HomeFactory.getAllBears().then(function(res) {
+			vm.bears = res;
 		});
 	}
 })();

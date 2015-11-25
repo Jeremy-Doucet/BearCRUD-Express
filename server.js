@@ -1,9 +1,9 @@
 "use strict";
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var app = express();
-var port = process.env.PORT || 3000;
+let express = require('express');
+let path = require('path');
+let bodyParser = require('body-parser');
+let app = express();
+let port = process.env.PORT || 3000;
 let Bear = require('./models/bear');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -27,13 +27,19 @@ app.get('/', function(req, res) {
 	res.render('index');
 });
 
-let counter = 0;
-app.get('/counter', (req, res) => {
-	// counter += 1; //counter++;
-	res.send({ counter: counter });
+// GET /bears
+app.get('/bears', (req, res) => {
+	res.send(Bear.getAllBears());
 });
 
-var server = app.listen(port, function() {
-	var host = server.address().address;
+// POST /bears
+app.post('/bears', (req, res) => {
+	Bear.create(req.body, (err, result) => {
+		if(err) return res.status(400).send(err);
+		res.send(result);
+	});
+});
+
+module.exports = app.listen(port, function() {
 	console.log('Example app listening at http://localhost:' + port);
 });

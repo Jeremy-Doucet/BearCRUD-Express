@@ -8,6 +8,10 @@
 			url: '/',
 			templateUrl: '/templates/home.html',
       controller: 'HomeController as vm'
+		}).state('CreateBear', {
+			url: '/Bear/Create',
+			templateUrl: '/templates/create_bear.html',
+			controller: 'CreateBearController as vm'
 		});
 		$urlRouterProvider.otherwise('/');
 	}
